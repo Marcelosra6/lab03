@@ -83,17 +83,17 @@ int main()
             cout << "estableciendo fecha limite" << endl;
         }
         else if (opc=="4"){
-            int opc_progreso;
+            char opc_progreso;
             cout << "************ Progreso de la Tarea ************" << endl;
             while (true){
                 cout<<"1. Mostrar tareas cargadas \n2.Mostrar tareas entregadas \n3. Salir\n********************************************"<<endl;
-                if (opc==1){
+                if (opc_progreso=="1"){
                     administrador.mostrar_tareas_cargadas();
                 }
-                else if(opc==2){
+                else if(opc_progreso=="2"){
                     administrador.mostrar_tareas_entregadas();
                 }
-                else if(opc==3){
+                else if(opc_progreso=="3"){
                     cout << "\nSaliendo" << endl;
                     break;
                 }
