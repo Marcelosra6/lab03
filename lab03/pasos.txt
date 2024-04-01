@@ -1,0 +1,8 @@
+PASOS PARA SUBIR LOS CAMBIOS AL GITHUB 
+1. git add .
+2. git commit -m "Descripción breve de tus cambios"
+3. git push origin <nombre_de_tu_rama>
+
+
+COLABORADORES: git clone <url_del_repositorio>
+               Luego los demás pasos
