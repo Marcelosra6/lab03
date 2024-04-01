@@ -68,21 +68,21 @@ int main()
     Progreso administrador("trabajo LP2",1,0); 
     administrador.cargar_tarea();
     administrador.tarea_entregada();
-    int opc;
+    char opc; //char para que acepte el ingreso de cualquier opcion
     cout << "************ Bienvenido al menu ************" << endl;
     while (true){
         cout << "Escoja una opcion\n1.Crear tarea \n2.asignar Tarea \n3.Establecer fecha limite\n4.Seguimiento del progreso \n5.Salir \n********************************************" << endl;
         cin >> opc;
-        if (opc == 1){
+        if (opc == "1"){
             cout << "creando tarea" << endl;
         }
-        else if (opc==2){
+        else if (opc=="2"){
             cout <<"asignando una tarea" << endl;
         }
-        else if (opc==3){
+        else if (opc=="3"){
             cout << "estableciendo fecha limite" << endl;
         }
-        else if (opc==4){
+        else if (opc=="4"){
             int opc_progreso;
             cout << "************ Progreso de la Tarea ************" << endl;
             while (true){
@@ -102,7 +102,7 @@ int main()
                 }
             }
         }
-        else if (opc==5){
+        else if (opc=="5"){
             cout << "\nSaliendo" << endl;
             break;
         }
