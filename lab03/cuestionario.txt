@@ -1,0 +1,83 @@
+1. ¿Qué significa SOLID?
+El termino SOLID es un acronimo creado por sus siglas en ingles:
+S-Single Responsability Principle (SRP)
+O-Open/Closed Pinciple (OCP)
+L-Liskov Substitution Principle (LSP)
+I-Interface Segregation Principle (ISP)
+D-Dependency Inversion Principle (DIP)
+El acronimo fue propuesto por el desarrollador de softeare Michael Feathers en su libro "Working Effectively with legacy code" pero basicamente tomo los principios de Robert C. Martin dados en su ensayo "Principios de diseño y patrones de diseño"
+
+2. ¿Cuál es el objetivo principal de SOLID?
+Los principios SOLID son la base del POO y su principal objetivo es la tarea de mejorar la eficiencia a la hora de escribir codigo, haciedo accesible la posibilidad e volver mas y as complejo el mismo.
+
+3. ¿Qué es el Principio de Responsabilidad Única?
+El SRP define que cada clase debe tener una unica responsabilidad
+
+4. ¿Por qué es importante seguir el Principio de Responsabilidad Única?
+Su importancia recae en la facilidad que brinda a la hora de correcion de errores mejorando la solucion de estes debido a una buena segmentacion dada por este principio.
+
+5. ¿Qué es el Principio Abierto/Cerrado?
+El OCP define que el codigo debe estar abierto para la extension pero cerrado a la modifucacion
+
+6. ¿Por qué es importante seguir el Principio Abierto/Cerrado?
+Su importancia esta en la posibilidad de agregar nuevas funcionalidades a un codigo ya escrito.
+
+7. ¿Qué es el Principio de Sustitución de Liskov?
+El LSP plante que los objetos de las subclases deben ser remplazables por objeots de sus clases superiores
+
+8. ¿Por qué es importante seguir el Principio de Sustitución de Liskov?
+Su importancia esta en que garantiza la operatividad del sistema ademas de permitir remplazar instancias de clases deribadas sin tocas instancias de la clase base permitiendo extender el softeare sin errores de su codigo base.
+
+9. ¿Qué es el Principio de Segregación de Interfaces?
+El ISP pretende que se creen interfaces diferentes para cada cliente especifico, es decir que en vez de crear una interfaz general para todo tipo de cliente, se cree una para cada tipo especifico de cliente.
+
+10. ¿Por qué es importante seguir el Principio de Segregación de Interfaces?
+Su importacia se encuentra en la facilidad que nos ofrece esta practica a la hora de trabajar en una interfaz de un cliente en especifico dado que se da esa flexibilidad contraria a la que daria trabajar con una interfaz de uso comun y generica.
+
+11. ¿Qué es el Principio de Inversión de Dependencia?
+El principio establece que no debe existir una dependencia de modulos de alto nivel hacia los modulos de bajo nivel.
+
+12. ¿Por qué es importante seguir el Principio de Inversión de Dependencia?
+Su importancia esta en que nos permite crear sistemas flexibles y mantenibles ya que podemos reducir el acoplamiento entre modulos, aumentar la modularidad del codigo y mejorar la capacidad de mantenimiento del sistema.
+
+13. ¿Cuál es la diferencia entre acoplamiento y cohesión?
+El acoplamineto refiere a la interdependencia entre los modulos y la cohesion a como se relacionan las funciones dentro de un modulo. Ejemplificando el acoplamiento, si hay una clase A que usa una clase B, se dice que A depende de B por ende existe acoplamiento entre dichas clase. Ahora por el lado de la cohesion, una baja o alta cohesion dependera de que tan relacionados esten los metodos dentro de un modulo.
+
+14. ¿Cómo puede un diseño SOLID mejorar la mantenibilidad de un código?
+La estructura del codigo desarrollado bajo los principios SOLID brinda una mantenibilidad alta debido a factores como su segregacion donde podemos trabajar una parte en especifico del codigo si esta tuviese un error.
+
+15. ¿Cómo puede un diseño SOLID mejorar la escalabilidad de una aplicación?
+Con un codigo segmetado para cada tarea en especifico y aplicado el OCP podemos agregar codigo, mas no modificarlo. Es decir agregamos funcionalidades, corregimos errores pero no alteramos la estructura general y no afectamos a la funcionalidad del codigo.
+
+16. ¿Cómo puede un diseño SOLID mejorar la testabilidad de una aplicación?
+AL ofrecer un codigo limpio y bien estructurado, si se descubirese un error a la hora de ejecutar los testeos, es mas sencillo realizar la correccion de del error gracias a las buenas practicas de los principios solid.
+
+17. ¿Cuál es la relación entre SOLID y los patrones de diseño?
+Los patrones de diseño buscan proporcionar catalogos de elemteos reusables en el diseño de software para evitar la busqueda de soluciones a problemas ya aborados. La calidad de codigo entregada por el desarrollo mediante los metodos solid proporciona que este reutilizamiento de codigo sea viable.
+
+18. ¿Cómo se relaciona SOLID con los principios de diseño ágil?
+Los principios de diseño agil estan relacionados con los de diseño agil porque ambos lo que buscan es el desarrollo de software mediante buenas practicas con el fin de obtener buenos resultados.
+
+19. ¿Cómo puede SOLID ayudar a los desarrolladores a trabajar en equipo?
+El usar los pricipios SOLID los desarroladores mejoran la eficiencia de trabajar en equipo, pudiendo trabajar cada quien en una parte en especifico y siendo estas mismas abiertas a modificaciones se pude enfocar el equipo en solucionar un problema sin afectar el trabajo del otro.
+
+20. ¿Cómo puede SOLID mejorar la eficiencia de la programación?
+Los principios SOLID nos brindan bastantes beneficios al ser usados, solo tomando en cuenta factores como la mantenibilidad, la deteccion de erroes y otros, se intuye que desarrollando codigo bajo estos principios se obtendra un trabajo limpio, organizado y abierto a mejoras.
+
+21. ¿Cuál es el efecto de ignorar los principios SOLID en el diseño de un sistema?
+La difucltad de entendimiento del mismo, siendo asi que al ignorar desarrollamos codigo sin ningun tipo de buena practica y creando multiples problemas al mismo.
+
+22. ¿Cómo se pueden medir los beneficios de seguir los principios SOLID en un proyecto de programación?
+Se puede comparar los principios midiendo parametros como:
+-Tiempo de desarrollo
+-Mantenibilidad del codigo
+-Testibilidad del codigo
+
+23. ¿Cómo se puede asegurar que un diseño SOLID sea efectivo en el tiempo?
+La antes descrita mantenibilidad del mismo dado que aunque pase el tiempo el mismo podra ser adaptado a cada nueva funcionalidad que se requiera asi mismo al estar diseñado bajo buenas practicas sera mas facil de comprender por quien se haga cargo del proyecto.
+
+24. ¿Qué desventajas pueden tener los diseños basados en SOLID?
+La principal desventaja puede ser que para aplicar estos principio se requiere de mucha practica y de tiempo para realizar correctamente codigo bajo los mismo, es decir para lograr un buen proyecto en solid deberas invertir el tiempo necesario en desarrollarlo.
+
+25. ¿Cómo se puede aplicar SOLID en diferentes tipos de proyectos de programación, como
+aplicaciones web, aplicaciones móviles o sistemas embebidos?
