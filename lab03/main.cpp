@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>   
 using namespace std;
-
 class Comentario{
     private:
         string texto;
@@ -29,7 +28,7 @@ class Archivo {
             return contenido;
         }
 };
-
+//otras clases
 class Proyecto {
     private:
         string nombre;
@@ -96,7 +95,6 @@ class Administrador {
             }
         }
 };
-
 class Task {
 private:
     string description; //Small description about the task
@@ -119,23 +117,20 @@ public:
     cout << description;}   
     void getIDEmployee(){
     cout << idEmployee;}
-    
 };
-
 class Progreso : public Task{
 private:
     //atributo heredado 
     string nombre;
-    string comentario;
+    
     int num_tareas;
     int num_tareas_entregadas;
     vector <string> lista_tareas;
     vector <string> lista_tareas_entregadas;
 public:
-    Progreso( string taskName, string comentario, int num_tareas, int num_tareas_entregadas){
+    Progreso( string taskName, int num_tareas, int num_tareas_entregadas) : Task(taskName){
         this->nombre=nombre;
         this->num_tareas=num_tareas;
-        this->comentario;
     }
     //atributo heredado 
     void getTaskName_p(){
@@ -159,45 +154,38 @@ public:
             cout<<"Tarea "<<j+1<<": "<<this->lista_tareas[j]<<endl;
         }
     }
-    
 };
-
 int main()
 {
-    string com=" ";
-    Progreso administrador("trabajo LP2",com,1,0); 
+    Progreso administrador("trabajo LP2",1,0); 
     administrador.cargar_tarea();
     administrador.tarea_entregada();
-    int opc;
+    char opc; //char para que acepte el ingreso de cualquier opcion
     cout << "************ Bienvenido al menu ************" << endl;
     while (true){
         cout << "Escoja una opcion\n1.Crear tarea \n2.asignar Tarea \n3.Establecer fecha limite\n4.Seguimiento del progreso \n5.Salir \n********************************************" << endl;
         cin >> opc;
-        if (opc == 1){
+        if (opc == '1'){
             cout << "creando tarea" << endl;
         }
-        else if (opc==2){
+        else if (opc=='2'){
             cout <<"asignando una tarea" << endl;
         }
-        else if (opc==3){
+         else if (opc=='3'){
             cout << "estableciendo fecha limite" << endl;
         }
-        else if (opc==4){
-            int opc_progreso;
+        else if (opc=='4'){
+            char opc_progreso;
             cout << "************ Progreso de la Tarea ************" << endl;
             while (true){
-                cout<<"1. Mostrar tareas cargadas \n2.Mostrar tareas entregadas \n3. Agregar comentario \n4. Salir\n********************************************"<<endl;
-                if (opc==1){
+                cout<<"1. Mostrar tareas cargadas \n2.Mostrar tareas entregadas \n3. Salir\n********************************************"<<endl;
+                if (opc_progreso=='1'){
                     administrador.mostrar_tareas_cargadas();
                 }
-                else if(opc==2){
+                else if(opc_progreso=='2'){
                     administrador.mostrar_tareas_entregadas();
                 }
-                else if(opc==3){
-                    cout<<"Comentario: ";cin>>com;
-                    administrador.agregar_comentario();
-                }
-                else if(opc==4){
+                 else if(opc_progreso=='3'){
                     cout << "\nSaliendo" << endl;
                     break;
                 }
@@ -206,7 +194,7 @@ int main()
                 }
             }
         }
-        else if (opc==5){
+         else if (opc=="5"){
             cout << "\nSaliendo" << endl;
             break;
         }
