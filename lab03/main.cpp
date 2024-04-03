@@ -142,14 +142,14 @@ public:
     void getIDEmployee(){
     cout << idEmployee;}
 };
-class Progreso : public Task{//SRP, LSP y DIP
+class Progreso : public Task, public FechaLimiteInterface{//SRP, LSP y DIP
 private:
     int num_tareas;
     int num_tareas_entregadas;
     vector <string> lista_tareas;
     vector <string> lista_tareas_entregadas;
 public:
-    Progreso( string taskName, string description, int idEmployee, int num_tareas, int num_tareas_entregadas) : Task(taskName, description,idEmployee){
+    Progreso( string taskName, string description, int idEmployee, int num_tareas, int num_tareas_entregadas) : Task(taskName, description,idEmployee), FechaLimiteInterface(dia, mes, hora){
         this->num_tareas=num_tareas;
     }
     //atributo heredado 
