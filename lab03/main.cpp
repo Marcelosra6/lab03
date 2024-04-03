@@ -182,52 +182,68 @@ int main()
     Progreso administrador_progreso(nom_tarea,desc_tarea,id,n_tareas,n_tareas_entregadas); 
     /*administrador_progreso.cargar_tarea();
     administrador_progreso.tarea_entregada();*/
-    char opc; //char para que acepte el ingreso de cualquier opcion
+    
+    int opc1,opc2, opc_progreso;
     cout << "************ Bienvenido al menu ************" << endl;
-    //OCP
-    while (true){
-        cout << "Escoja una opcion\n1.Crear tarea \n2.Crear Proyecto \n3.Añadir Comentario\n4.Seguimiento del progreso de las Tareas \n5.Salir \n********************************************" << endl;
-        cin >> opc;
-        if (opc == '1'){//ISP
-            cout << "Creando tarea..." << endl;
-            cout<<"Nombre de la tarea: ";cin>>nom_tarea;
-            administrador_progreso.getTaskName();
-            administrador_progreso.cargar_tarea();
-            administrador_progreso.cargar_tarea();
-        }
-        else if (opc=='2'){
-            cout <<"Creando proyecto..." << endl;//ISP
-        }
-         else if (opc=='3'){
-            cout << "Comentario añadido" << endl;//ISP
-        }
-        else if (opc=='4'){
-            char opc_progreso;
-            cout << "************ Progreso de la Tarea ************" << endl;//ISP
-            while (true){
-                cout<<"1. Mostrar tareas cargadas \n2.Mostrar tareas entregadas \n3. Salir\n********************************************"<<endl;
-                cin>>opc_progreso;
-                if (opc_progreso=='1'){
-                    administrador_progreso.mostrar_tareas_cargadas();
+    while(true){
+        try {
+            cout << "Seleccione: \n1.Tarea \n2.Proyecto \n3.Salir \n********************************************" << endl;
+            opc1 = getIntegerInput();
+            
+            if(opc1 == 3) break;
+
+            while(true){
+                if (opc1 == 1){
+                    cout << "Escoja una opcion\n1.Crear tarea \n2.asignar Tarea \n3.Establecer fecha limite\n4.Seguimiento del progreso \n5.Retroceder \n********************************************" << endl;
+                    opc2 = getIntegerInput();
+                    
+                    if (opc2 == 5) break;
+
+                    if (opc2 == 1){
+                        cout << "Creando tarea..." << endl;
+                        cout<<"Nombre de la tarea: ";cin>>nom_tarea;
+                        administrador_progreso.getTaskName();
+                        administrador_progreso.cargar_tarea();
+                        administrador_progreso.cargar_tarea();
+                    }
+                    else if (opc2==2){
+                        cout <<"Asignando tarea" << endl;//ISP
+                    }
+                    else if (opc2==3){
+                    cout << "establecer fecha limite" << endl;//ISP
+                    }
+                    else if (opc2==4){
+                        cout << "************ Progreso de la Tarea ************" << endl;//ISP
+                        while (true){
+                        cout<<"1. Mostrar tareas cargadas \n2.Mostrar tareas entregadas \n3. Retroceder\n********************************************"<<endl;
+                        opc_progreso = getIntegerInput();
+                            if (opc_progreso== 1){
+                                administrador_progreso.mostrar_tareas_cargadas();
+                            }
+                            else if(opc_progreso== 2){
+                                administrador_progreso.mostrar_tareas_entregadas();
+                            }
+                            else if(opc_progreso== 3){
+                                cout << "\nRetrocediendo" << endl;
+                                break;
+                            }
+                        }
+                    }
                 }
-                else if(opc_progreso=='2'){
-                    administrador_progreso.mostrar_tareas_entregadas();
-                }
-                 else if(opc_progreso=='3'){
-                    cout << "\nSaliendo" << endl;
-                    break;
-                }
-                else{
-                    cout << "CARACTER INCORRECTO INGRESE NUEVAMENTE" << endl;
+                else if (opc1 == 2){
+                    cout << "escoja una opcion\n1.crear proyecto \naniadir comentario \n" << endl;
+                    opc2 = getIntegerInput();
+                    if (opc2 == 1){
+                        cout <<"Creando proyecto..." << endl;//ISP
+                    }
+                    else if (opc2 == 2){
+                        cout << "Comentario añadido" << endl;//ISP
+                    }
                 }
             }
         }
-         else if (opc=='5'){
-            cout << "\nSaliendo" << endl;
-            break;
-        }
-        else{
-            cout << "\nCARACTER INCORRECTO INGRESE NUEVAMENTE" << endl;
+        catch(invalid_argument& e) {
+            cout << e.what() << ". Intentelo de nuevo.\n";
         }
     }
     
