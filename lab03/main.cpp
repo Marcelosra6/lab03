@@ -96,6 +96,28 @@ class Administrador {//SRP Y DIP
             }
         }
 };
+class FechaLimiteInterface {
+public:
+    virtual void imprimirTarea() const = 0; // Método para imprimir la tarea
+    virtual ~FechaLimiteInterface() {} // Destructor virtual para permitir la destrucción polimórfica
+};
+
+// Implementación concreta de la gestión de la fecha límite
+class FechaLimite : public FechaLimiteInterface {
+protected:
+    int dia;
+    string mes;
+    int hora;
+public:
+    FechaLimite(int dia, string mes, int hora) : dia(dia), mes(mes), hora(hora) {}
+
+    void imprimirTarea() const override {
+        cout << "Vencimiento de su próxima tarea" << endl;
+        cout << "Dia: " << dia << endl;
+        cout << "Mes: " << mes << endl;
+        cout << "Hora: " << hora << endl;
+    }
+};
 class Task {//SRP
 protected:
     string description; //Small description about the task
