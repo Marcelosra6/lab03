@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>   
+#include <string>
 using namespace std;
-class Comentario{
+class Comentario{//SRP
     private:
         string texto;
         string nombre;
@@ -15,7 +16,7 @@ class Comentario{
         }
 };
 
-class Archivo {
+class Archivo {//SRP
     private:
         string nombre;
         string contenido;
@@ -29,7 +30,7 @@ class Archivo {
         }
 };
 //otras clases
-class Proyecto {
+class Proyecto {//SRP Y DIP
     private:
         string nombre;
         vector<Comentario> comentarios;
@@ -59,7 +60,7 @@ class Proyecto {
         }
 };
 
-class Administrador {
+class Administrador {//SRP Y DIP
     private:
         vector<Proyecto> proyectos;
     public:
@@ -95,7 +96,7 @@ class Administrador {
             }
         }
 };
-class Task {
+class Task {//SRP
 protected:
     string description; //Small description about the task
     int idEmployee; //who is going to do the task
@@ -119,7 +120,7 @@ public:
     void getIDEmployee(){
     cout << idEmployee;}
 };
-class Progreso : public Task{
+class Progreso : public Task{//SRP, LSP y DIP
 private:
     int num_tareas;
     int num_tareas_entregadas;
@@ -155,32 +156,35 @@ public:
 int main()
 {
     string nom_tarea, desc_tarea; int id, n_tareas, n_tareas_entregadas;
+    Administrador admin_proyectos();
     Progreso administrador_progreso(nom_tarea,desc_tarea,id,n_tareas,n_tareas_entregadas); 
     /*administrador_progreso.cargar_tarea();
     administrador_progreso.tarea_entregada();*/
     char opc; //char para que acepte el ingreso de cualquier opcion
     cout << "************ Bienvenido al menu ************" << endl;
+    //OCP
     while (true){
         cout << "Escoja una opcion\n1.Crear tarea \n2.Crear Proyecto \n3.Añadir Comentario\n4.Seguimiento del progreso de las Tareas \n5.Salir \n********************************************" << endl;
         cin >> opc;
-        if (opc == '1'){
+        if (opc == '1'){//ISP
+            cout << "Creando tarea..." << endl;
+            cout<<"Nombre de la tarea: ";cin>>nom_tarea;
             administrador_progreso.getTaskName();
             administrador_progreso.cargar_tarea();
             administrador_progreso.cargar_tarea();
-            cout << "Creando tarea..." << endl;
-            
         }
         else if (opc=='2'){
-            cout <<"Creando proyecto..." << endl;
+            cout <<"Creando proyecto..." << endl;//ISP
         }
          else if (opc=='3'){
-            cout << "Comentario añadido" << endl;
+            cout << "Comentario añadido" << endl;//ISP
         }
         else if (opc=='4'){
             char opc_progreso;
-            cout << "************ Progreso de la Tarea ************" << endl;
+            cout << "************ Progreso de la Tarea ************" << endl;//ISP
             while (true){
                 cout<<"1. Mostrar tareas cargadas \n2.Mostrar tareas entregadas \n3. Salir\n********************************************"<<endl;
+                cin>>opc_progreso;
                 if (opc_progreso=='1'){
                     administrador_progreso.mostrar_tareas_cargadas();
                 }
