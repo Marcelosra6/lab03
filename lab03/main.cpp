@@ -1,18 +1,42 @@
 #include <iostream>
-#include <vector>   
+#include <vector>  
 #include <string>
+#include <stdexcept>
+#include <limits>
+
 using namespace std;
+
+int getIntegerInput() {
+    int input;
+    cin >> input;
+    if(cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        throw invalid_argument("Se esperaba un número entero");
+    }
+    return input;
+}
+//SRP
+//SRP
+//SRP Y DIP
 class Comentario{//SRP
     private:
         string texto;
         string nombre;
     public:
+        Comentario() {}
         Comentario(string t, string n) : texto(t), nombre(n) {}
         string getTexto() const {
             return texto;
         }
         string getNombre() const {
             return nombre;
+        }
+        void Ingreso() {
+            cout<<"Ingrese el comentario: ";
+            getline(cin,texto);
+            cout<<"Ingrese el nombre del autor del comentario: ";
+            getline(cin,nombre);
         }
 };
 
@@ -21,6 +45,7 @@ class Archivo {//SRP
         string nombre;
         string contenido;
     public:
+        Archivo() {}
         Archivo(string n, string c) : nombre(n), contenido(c) {}
         string getNombre() const {
             return nombre;
@@ -28,14 +53,21 @@ class Archivo {//SRP
         string getContenido() const {
             return contenido;
         }
+        void Ingreso() {
+            cout<<"Ingrese el nombre del archivo: "<<endl;
+            getline(cin,nombre);
+            cout<<"Ingrese el contenido del archivo: "<<endl;
+            getline(cin,contenido);
+        }
 };
-//otras clases
+
 class Proyecto {//SRP Y DIP
     private:
         string nombre;
         vector<Comentario> comentarios;
         vector<Archivo> archivos;
     public:
+        Proyecto() {}
         Proyecto(string n) : nombre(n) {}
         string getNombre() const {
             return nombre;
@@ -58,24 +90,34 @@ class Proyecto {//SRP Y DIP
                 cout<<"----"<<archivo.getNombre()<<endl;
             }
         }
+        void Ingreso() {
+            cout<<"Ingresar un nombre para el proyecto: ";
+            cin>>nombre;
+        }
 };
 
-class Administrador {//SRP Y DIP
+class Administrador {// SRP Y DIP
     private:
         vector<Proyecto> proyectos;
     public:
-        void Crear_proyecto(string nombre) {
-            proyectos.emplace_back(nombre);
+        void Crear_proyecto() {
+            Proyecto proyecto;
+            proyecto.Ingreso();
+            proyectos.push_back(proyecto);
         }
-        void Añardir_comentarioPro(int proyectoId, Comentario comentario) {
+        void Añadir_comentarioPro(int proyectoId) {
             if (proyectoId >= 0 && proyectoId < proyectos.size()) {
+                Comentario comentario;
+                comentario.Ingreso();
                 proyectos[proyectoId].Añadir_comentario(comentario);
             } else {
-                cout<<"La ID del proyecto es invalida" << endl;
+                cout<<"La ID del proyecto es invalida"<<endl;
             }
         }
-        void Añadir_archivoPro(int proyectoId, Archivo archivo) {
+        void Añadir_archivoPro(int proyectoId) {
             if (proyectoId >= 0 && proyectoId < proyectos.size()) {
+                Archivo archivo;
+                archivo.Ingreso();
                 proyectos[proyectoId].Añadir_archivo(archivo);
             } else {
                 cout<<"La ID del proyecto es invalida"<<endl;
@@ -96,22 +138,30 @@ class Administrador {//SRP Y DIP
             }
         }
 };
-class FechaLimiteInterface {
-public:
-    virtual void imprimirTarea() const = 0; // Método para imprimir la tarea
-    virtual ~FechaLimiteInterface() {} // Destructor virtual para permitir la destrucción polimórfica
-};
-
-// Implementación concreta de la gestión de la fecha límite
-class FechaLimite : public FechaLimiteInterface {
-protected:
+class Fechas_limite {
+private:
     int dia;
     string mes;
     int hora;
 public:
-    FechaLimite(int dia, string mes, int hora) : dia(dia), mes(mes), hora(hora) {}
+    Fechas_limite() {
+        dia = 0;
+        mes = "";
+        hora = 0;
+    }
 
-    void imprimirTarea() const override {
+    void ingresarDatos() {
+        cout << "Ingrese el día: ";
+        cin >> dia;
+
+        cout << "Ingrese el mes: ";
+        cin >> mes;
+
+        cout << "Ingrese la hora: ";
+        cin >> hora;
+    }
+   
+    void imprimirTarea() {
         cout << "Vencimiento de su próxima tarea" << endl;
         cout << "Dia: " << dia << endl;
         cout << "Mes: " << mes << endl;
@@ -133,29 +183,26 @@ public:
     void showTaskInfotmation(){
         cout << "Task name: " << taskName << endl;
         cout << "Description: " << description << endl;
-        cout << "ID Employee: " << idEmployee << endl;
+
     }
     void getTaskName(){
     cout << taskName;}
     void getDescription(){
-    cout << description;}   
+    cout << description;}  
     void getIDEmployee(){
     cout << idEmployee;}
 };
-class Progreso : public Task, public FechaLimiteInterface{//SRP, LSP y DIP
+class Progreso : public Task , public Fechas_limite{//SRP, LSP y DIP
 private:
     int num_tareas;
     int num_tareas_entregadas;
     vector <string> lista_tareas;
     vector <string> lista_tareas_entregadas;
 public:
-    Progreso( string taskName, string description, int idEmployee, int num_tareas, int num_tareas_entregadas) : Task(taskName, description,idEmployee), FechaLimiteInterface(dia, mes, hora){
+    Progreso(int dia, string mes, int hora, string taskName, string description, int idEmployee, int num_tareas, int num_tareas_entregadas) : Task(taskName, description,idEmployee), Fechas_limite(){
         this->num_tareas=num_tareas;
     }
-    //atributo heredado 
-    void getTaskName(){
-        cout<<taskName;
-    }
+   
     void cargar_tarea(){
         this->num_tareas+=1;
         lista_tareas.push_back(this->taskName);
@@ -177,34 +224,38 @@ public:
 };
 int main()
 {
-    string nom_tarea, desc_tarea; int id, n_tareas, n_tareas_entregadas;
-    Administrador admin_proyectos();
-    Progreso administrador_progreso(nom_tarea,desc_tarea,id,n_tareas,n_tareas_entregadas); 
+    string nom_tarea, desc_tarea,month; int id, n_tareas, n_tareas_entregadas,day,hour;
+    Administrador administrador;
+    Progreso administrador_progreso(day,month,hour,nom_tarea,desc_tarea,id,n_tareas,n_tareas_entregadas);
     /*administrador_progreso.cargar_tarea();
     administrador_progreso.tarea_entregada();*/
-    
+   
     int opc1,opc2, opc_progreso;
     cout << "************ Bienvenido al menu ************" << endl;
     while(true){
         try {
             cout << "Seleccione: \n1.Tarea \n2.Proyecto \n3.Salir \n********************************************" << endl;
             opc1 = getIntegerInput();
-            
+           
             if(opc1 == 3) break;
 
             while(true){
                 if (opc1 == 1){
                     cout << "Escoja una opcion\n1.Crear tarea \n2.asignar Tarea \n3.Establecer fecha limite\n4.Seguimiento del progreso \n5.Retroceder \n********************************************" << endl;
                     opc2 = getIntegerInput();
-                    
+                   
                     if (opc2 == 5) break;
 
                     if (opc2 == 1){
                         cout << "Creando tarea..." << endl;
                         cout<<"Nombre de la tarea: ";cin>>nom_tarea;
-                        administrador_progreso.getTaskName();
+                        cout<<"Descripción de la tarea: ";cin>>desc_tarea;
+                        administrador_progreso.ingresarDatos();
+                       
                         administrador_progreso.cargar_tarea();
-                        administrador_progreso.cargar_tarea();
+                       
+                        administrador_progreso.showTaskInfotmation();
+                        administrador_progreso.imprimirTarea();
                     }
                     else if (opc2==2){
                         cout <<"Asignando tarea" << endl;//ISP
@@ -231,21 +282,54 @@ int main()
                     }
                 }
                 else if (opc1 == 2){
-                    cout << "escoja una opcion\n1.crear proyecto \naniadir comentario \n" << endl;
+                    cout<<"*****Creacion del proyecto*******"<<endl;
+                    cout<<"1.Crear Proyecto  \n2.Añadir comentario \n3.Añadir archivos \n4.Mostrar Proyecto \n5.Detalles del proyecto \n6.Salir\n*********************"<<endl;
                     opc2 = getIntegerInput();
-                    if (opc2 == 1){
-                        cout <<"Creando proyecto..." << endl;//ISP
+                    if (opc2==1){
+                        administrador.Crear_proyecto();
+                        cout <<"Creando proyecto..." << endl;
                     }
-                    else if (opc2 == 2){
-                        cout << "Comentario añadido" << endl;//ISP
+                    else if(opc2==2){
+                        int proyectoId;
+                        cout<<"Ingresar la ID del proyecto: ";
+                        cin>>proyectoId;
+                        cin.ignore();
+                        administrador.Añadir_comentarioPro(proyectoId);
+                        cout << "Comentario añadido" << endl;
+                    }
+                    else if(opc2==3){
+                        int proyectoId;
+                        cout<<"Ingresar la ID del proyecto: ";
+                        cin>>proyectoId;
+                        cin.ignore();
+                        administrador.Añadir_archivoPro(proyectoId);
+                    }
+                    else if (opc2==4){
+                        administrador.Mostrar_proyectos();
+                    }
+                    else if(opc2==5){
+                        int proyectoId;
+                        cout<<"Ingresar ID del proyecto: ";
+                        cin>>proyectoId;
+                        cin.ignore();
+                        administrador.Mostrar_detallesPro(proyectoId);
+                    }
+                    else if(opc2==6){
+                        cout << "\nSaliendo" << endl;
+                        break;
+                    }
+                    else{
+                        cout << "CARACTER INCORRECTO INGRESE NUEVAMENTE" << endl;
+                        }
                     }
                 }
             }
-        }
+
         catch(invalid_argument& e) {
             cout << e.what() << ". Intentelo de nuevo.\n";
         }
     }
-    
+   
     return 0;
 }
+
